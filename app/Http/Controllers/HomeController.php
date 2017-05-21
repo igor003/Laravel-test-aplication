@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Teacher;
 use App\Model\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,14 @@ class HomeController extends Controller
                 }
                 break;
             case 'teacher':
-                return redirect(route('show_subjects_teacher'));
+                $teacher = Teacher::where('id_user', '=', Auth::user()->id)->first();
+//                dd($teacher);
+                if(count($teacher) == 0){
+                    return redirect(route('show_subjects_teacher'));
+                }else{
+                    return view('teacherJournal',['id_subject'=>$teacher->id_subject]);
+                }
+
                 break;
             default:
                 return view('home');

@@ -15,4 +15,14 @@ class Users extends Model
     public function is_teacher(){
         return $this->attributes->status === 'teacher';
     }
+    public function evaluations(){
+        return $this->hasMany('App\Model\TeacherStudentEvaluation','id_student','id');
+    }
+    public function teachers(){
+        return $this->hasMany('App\Model\TeacherStudentEvaluation','id_teacher','id');
+    }
+    public function teacher(){
+        return $this->hasOne('App\Model\Teacher','id_user','id');
+    }
+
 }

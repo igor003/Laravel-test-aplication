@@ -34,7 +34,7 @@ class StudentController extends Controller
 //        foreach($subject as $sub){
 //            $subjects[] =  $sub['subject'];
 //        }
-        $student = Users::find(Auth::user()->id);
+        $student = Users::find(Auth::user()->id)->evaluations->sortByDesc('created_at');
         return view('studentDnevnik',['student'=> $student]);
     }
 }
